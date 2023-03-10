@@ -13,10 +13,7 @@ function Calculator() {
   const inputHandler = (event) => {
     if (answer === "Invalid Input!!") return;
     let val = event.target.innerText;
-
-    //Radom from 0 to 1000
-    let random = math.random(1000);
-    if (val === "Rad") val = math.round(random);
+    if (val === "Rad") val = "Rad(";
     if (val === "sin") val = "sin(";
     if (val === "cos") val = "cos(";
     if (val === "tan") val = "tan(";
@@ -27,7 +24,7 @@ function Calculator() {
     else if (val === "log") val = "log(";
 
     let str = input + val;
-    if (str.length > 14) return;
+    if (str.length > 18) return;
 
     if (answer !== "") {
       setInput(answer + val);
@@ -88,7 +85,15 @@ function Calculator() {
         const errorMessage = { message: "Brackets are not balanced!" };
         throw errorMessage;
       }
-      result = evaluate(finalexpression); //mathjs
+
+      console.log(finalexpression);
+      if (finalexpression.includes("Rad")) {
+        let random_num = finalexpression.replace ( /[^\d.]/g, '' );
+        result = math.floor(math.random() * random_num);//random number input
+      } else {
+        result = evaluate(finalexpression); //mathjs
+      }
+      
     } catch (error) {
       result =
         error.message === "Brackets are not balanced!"
