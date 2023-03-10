@@ -85,8 +85,7 @@ function Calculator() {
         const errorMessage = { message: "Brackets are not balanced!" };
         throw errorMessage;
       }
-
-      console.log(finalexpression);
+      
       if (finalexpression.includes("Rad")) {
         let random_num = finalexpression.replace ( /[^\d.]/g, '' );
         result = math.floor(math.random() * random_num);//random number input
